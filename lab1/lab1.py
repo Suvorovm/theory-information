@@ -50,3 +50,8 @@ for i in range(0, len(str)):
             break
 Shennon *= -1
 print("Shennon = ", Shennon)
+
+
+print("Энтропия равновероятных событий  = " + str(Khartli / len(str)))
+
+print("Энтропия не равновероятных событий  = " + str(Shennon / len(str)))
