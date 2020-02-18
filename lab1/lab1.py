@@ -34,14 +34,13 @@ for i in range(0, len(alphabet)):
 
 str1 = input("Input your message: ")
 
-if(str1 == len(str1)*str1[0]):
-        print("Алфавит состоит из одного символа? y/n")
-        if(input() == 'y'):
-            Khartli = len(str1) * math.log2(1)
-            print("Khartli = ", Khartli)
-            print("Энтропия равновероятных событий  = " + str(Khartli / len(str1)))
-            exit()
-
+if (str1 == len(str1) * str1[0]):
+    print("Алфавит состоит из одного символа? y/n")
+    if (input() == 'y'):
+        Khartli = len(str1) * math.log2(1)
+        print("Khartli = ", Khartli)
+        print("Энтропия равновероятных событий  = " + str(Khartli / len(str1)))
+        exit()
 
 Khartli = len(str1) * math.log2(len(alphabet))
 print("Khartli = ", Khartli)
@@ -50,18 +49,16 @@ for i in range(0, len(str1)):
     for j in range(0, len(alphabet)):
         if (str1[i] == alphabet[j]):
             Shennon += probability[j] * math.log2(probability[j])
-            #print(i, ":Shennon = ", Shennon)
+            # print(i, ":Shennon = ", Shennon)
             break
 Shennon *= -1
 print("Shennon = ", Shennon)
 
-
-
 print("Энтропия равновероятных событий  = " + str(Khartli / len(str1)))
 print("Энтропия не равновероятных событий  = " + str(Shennon / len(str1)))
-red = ((Khartli - Shennon)/Shennon)/len(alphabet)
+red = ((Khartli - Shennon) / Shennon) / len(alphabet)
 if len(str1) == 1:
     print("Избыточность не равновероятного источника сообщений = " + "0")
     print("Избыточность  равновероятного источника сообщений = " + "0")
-print("Избыточность не равновероятного источника сообщений = " + str(red) )
-print("Избыточность  равновероятного источника сообщений = " + "0" )
+print("Избыточность не равновероятного источника сообщений = " + str(red))
+print("Избыточность  равновероятного источника сообщений = " + "0")
