@@ -2,7 +2,7 @@ import math
 import string
 
 from Lab1Functions.CalculateEnthropy import calculate_entropy
-from Lab1Functions.measure import calculate_Shennon
+from Lab1Functions.measure import calculate_Shennon_count_information
 from Lab1Functions.genrator import generate_probability
 
 alphabet = string.ascii_letters + string.digits + ' '
@@ -20,13 +20,12 @@ if sourceString == len(sourceString) * sourceString[0]:
 
 Khartli = len(sourceString) * math.log2(len(alphabet))
 print("Khartli = ", Khartli)
-Shennon = calculate_Shennon(sourceString, probability)
-Shennon *= -1
+Shennon = calculate_Shennon_count_information(sourceString, probability)
 print("Shennon = ", Shennon)
 
 print("Энтропия равновероятных событий  = " + str(calculate_entropy(Khartli, sourceString)))
 print("Энтропия не равновероятных событий  = " + str(calculate_entropy(Shennon, sourceString)))
-red = ((Khartli - Shennon) / Shennon) / len(alphabet)
+red = 1 - Shennon / Khartli
 if len(sourceString) == 1:
     print("Избыточность не равновероятного источника сообщений = " + "0")
     print("Избыточность  равновероятного источника сообщений = " + "0")

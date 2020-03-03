@@ -4,16 +4,12 @@ import string
 alphabet = string.ascii_letters + string.digits + ' '
 
 
-def calculate_Shennon(str1, probability):
+def calculate_Shennon_count_information(str1, probability):
     Shennon = 0
-    for i in range(0, len(str1)):
-        for j in range(0, len(alphabet)):
-            if str1[i] == alphabet[j]:
-                Shennon += probability[j] * math.log2(probability[j])
-                # print(i, ":Shennon = ", Shennon)
-                break
-
-    return Shennon
+    for i in range(0, len(probability)):
+        Shennon += probability[i] * math.log2(probability[i])
+        break
+    return Shennon * (- len(str1))
 
 
 def calculate_Khartli_(sourceString):
