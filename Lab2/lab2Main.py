@@ -56,10 +56,16 @@ def encode_msg(usrMsg: str, codingRules: list):
 
 
 def decode_msg(usrMsg: str, codingRules: list):
+    index = 0
     resultString = ""
-    for i in range(0, len(usrMsg)):
-        val = [j for j in codingRules if j.code == usrMsg[i]][0]
-        resultString += val.symbol
+    while True:
+        listVal = [i for i in codingRules if usrMsg.find(i.code, index) == index]
+        if len(listVal) == 0:
+            return None
+        resultString += listVal[0].symbol
+        index += len(listVal[0].code)
+        if index == len(usrMsg):
+            break
     return resultString
 
 
@@ -85,6 +91,7 @@ def main():
             resultKhartlicod, resultShennoncod = generate_ruls(currentAlphabet, enteredAlphabetProbability,
                                                                resultKhartlicod, resultShennoncod)
         elif userValue == "3":
+            print("Введите сообщение для кодирования\n")
             usrMsg = input()
             verify_message(usrMsg, currentAlphabet)
             if resultKhartlicod is None or resultKhartlicod is None:
@@ -95,11 +102,19 @@ def main():
             print("Код Шеннона = " + resultMsgShennon)
             print("Код Хартли = " + resultMsgKhartlicod)
         elif userValue == "4":
+            print("\nВведите сообщени\n")
             usrMsg = input()
-            resultMsgShennon = decode_msg(usrMsg, resultShennoncod)
-            resultMsgKhartli = decode_msg(usrMsg, resultKhartlicod)
-            print("Декодировано по Шеннона = " + resultMsgShennon)
-            print("Декадировано по Хартли = " + resultMsgKhartli)
+            print("Использовался Код Шеннона (1) или код Хартли (2)\n")
+            usrChoose = input()
+            resultMsg = ""
+            if usrChoose == 1:
+                resultMsg = decode_msg(usrMsg, resultShennoncod)
+            else:
+                resultMsg = decode_msg(usrMsg, resultKhartlicod)
+            if resultMsg is None:
+                print("Нельзя декодировать слово. Ошибка")
+            else:
+                print("\nДекодировано  = " + resultMsg)
 
         # generate_probability_dict(alphabet)
 

@@ -1,6 +1,6 @@
+from random import random
 import random
 import string
-from random import random
 
 from Lab2.ProbabilityAlphabet import ProbabilityAlphabet
 
