@@ -48,4 +48,4 @@ def calculate_Khartli_code_with_sort(dictAlphabetProbability):
     rol_up_list = roll_up_Khartli_recursively(probabilityAlphabetList)
     result_list = []
     get_result_list(rol_up_list[0], result_list)
-
+    return result_list

@@ -1,4 +1,3 @@
-
 from Lab1Functions.genrator import *
 
 
@@ -19,9 +18,7 @@ def calculate_Shennon_cod(probabilityList, resultSum, leftBoard, rightBoard):
     for i in range(index + 1, rightBoard):
         summerRight += probabilityList[i].probability
         probabilityList[i].code += "1"
-    print("\n\n\n----\n")
-    print_list_probability(probabilityList)
-    print("\n\n\n\n\n")
+
     calculate_Shennon_cod(probabilityList, summerLeft, leftBoard, index + 1)
     calculate_Shennon_cod(probabilityList, summerRight, index + 1, rightBoard)
 
@@ -32,4 +29,4 @@ def calculate_Shennon_cod_with_sort(probabilityDict):
     probabilityAlphabetList = create_list_probability_alphabet(probabilityDict)
     sort_alphabet_list(probabilityAlphabetList)
     calculate_Shennon_cod(probabilityAlphabetList, resultSum, 0, len(probabilityAlphabetList))
-    print_list_probability(probabilityAlphabetList)
+    return probabilityAlphabetList

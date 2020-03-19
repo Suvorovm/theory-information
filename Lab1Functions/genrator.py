@@ -1,7 +1,6 @@
-from random import random
-
 import random
 import string
+from random import random
 
 from Lab2.ProbabilityAlphabet import ProbabilityAlphabet
 
@@ -22,7 +21,7 @@ def generate_probability():
     # Делим сумму на каждый элемент
     for i in range(0, len(alphabet)):
         probability[i] = probability[i] / sum
-        print(probability[i])
+
     return probability
 
 
@@ -38,6 +37,13 @@ def create_list_probability_alphabet(dictAlphabet):
     for key, value in dictAlphabet.items():
         resultListProbability.append(ProbabilityAlphabet(value, key))
     return resultListProbability
+
+
+def get_alphabet_by_dict(dictAlphabet):
+    alphabet = ''
+    for key, value in dictAlphabet.items():
+        alphabet += key
+    return alphabet
 
 
 def generate_probability_dict(alphabet):
