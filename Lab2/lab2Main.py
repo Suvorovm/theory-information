@@ -107,7 +107,7 @@ def main():
             print("Использовался Код Шеннона (1) или код Хартли (2)\n")
             usrChoose = input()
             resultMsg = ""
-            if usrChoose == 1:
+            if usrChoose == "1":
                 resultMsg = decode_msg(usrMsg, resultShennoncod)
             else:
                 resultMsg = decode_msg(usrMsg, resultKhartlicod)
