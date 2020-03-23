@@ -1,6 +1,9 @@
 import string
 
-from Lab1Functions.genrator import generate_probability_dict, get_alphabet_by_dict, print_list_probability
+from Lab1Functions.CalculateEnthropy import *
+from Lab1Functions.genrator import *
+from Lab1Functions.measure import *
+from Lab2.CalculateParameters import calculate_average_length
 from Lab2.Khartli import calculate_Khartli_code_with_sort
 from Lab2.ShennonCod import calculate_Shennon_cod_with_sort
 
@@ -11,7 +14,10 @@ def printMenu():
     print("2 - чтобы использовать полный алфовит , вероятности распредленны случайно ()\n")
     print("3  - Закодировать \n")
     print("4  -  Декодировать \n")
-    print("5  -  Выйти \n")
+    print("5  -  Энтропия источника \n")
+    print("6  - Средняя длинна слова\n")
+    print("7  - Коэффициент относительной избыточности\n")
+    print("8  - Избыточность источника сообщения\n")
 
 
 def EnterValues():
@@ -117,6 +123,24 @@ def main():
                 print("\nДекодировано  = " + resultMsg)
 
         # generate_probability_dict(alphabet)
+        elif userValue == "5":
+            print("\nВведите строку для определения энтропии (алфавит и вероятности задаются из 1 и 2 пунктов)\n")
+            if enteredAlphabetProbability is None:
+                print("не заданны вероятности\n")
+                continue
+            userString = input()
+            countInformationShennon = calculate_Shennon_count_information_by_dict(userString,
+                                                                                  enteredAlphabetProbability)
+            resultEntropy = calculate_entropy(countInformationShennon, userString)
+            print("\n\n Энтропия  =  " + str(resultEntropy))
+        elif userValue == "6":
+            if resultShennoncod is None:
+                print("не заданны вероятности или правила\n")
+                continue
+            avrLengthShennon = calculate_average_length(resultShennoncod)
+            avrLengthKhartli = calculate_average_length(resultKhartlicod)
+            print("Средняя длинна слова Шенона = " + str(avrLengthShennon))
+            print("Средняя длинна слова Хартли = " + str(avrLengthKhartli))
 
 
 def generate_ruls(currentAlphabet, enteredAlphabetProbability, resultKhartlicod, resultShennoncod):
