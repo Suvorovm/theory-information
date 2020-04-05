@@ -37,7 +37,7 @@ def EnterValues():
     summer = 0
     for key, value in dic.items():
         summer += value
-    if summer >= 1:
+    if summer > 1:
         print("Вероятность > 1. ERROR")
         return None
     return dic
@@ -163,8 +163,8 @@ def main():
             coefKhartli = 1 - entropy / lengthShennon
             coefShennon = 1 - entropy / avgLengthKhartli
             coefUniform = 1 - entropy / avgLengthUniformCode
-            print("Коэффициент избыточности по Хаффмен =  " + str(coefKhartli))
-            print("Коэффициент избыточности по Шеннону =  " + str(coefShennon))
+            print("Коэффициент избыточности по Хаффмен =  " + str(coefKhartli * -1))
+            print("Коэффициент избыточности по Шеннону =  " + str(coefShennon * -1))
             print("Коэффициент избыточности для равномерного кода =  " + str(coefUniform))
         elif userValue == "8":
             if resultShennoncod is None:
