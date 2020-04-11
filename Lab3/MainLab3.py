@@ -16,37 +16,42 @@ def create_matrix():
     return numpy.array([p1, p2, p3, p4])
 
 
+def create_p0():
+    return numpy.array([1, 0, 0, 0])
+
+
 def create_b():
-    return numpy.array([0.2, 0.3, 0.4, 0.1])
+    return numpy.array([0, 0, 0, 1])
 
 
-def solve_system(x, result):
-    a = numpy.array([x, x])
-    b = numpy.array([result, 1])
-    x = numpy.linalg.lstsq(a, b, rcond=None)[0]
-    print(x, end="\n")
-    return x
+def solve_system(sourceMatrix):
+    aMatrix = sourceMatrix.copy()
+    aMatrix[3] = [1] * 4
+    for i in range(0, 3):
+        for j in range(0, 3):
+            if i == j:
+                aMatrix[i][j] -= 1
+    resultX = numpy.linalg.solve(aMatrix, create_b())
+    return resultX
 
 
 def main():
+    print(f"P0 = {create_p0()}")
     print("Исхожная матрица")
     matrix = create_matrix()
-    p0 = create_b()
-    pn = p0
-    solvedMatrix = []
-    for j in range(0, 4):
-        row = solve_system(matrix[j], pn[j])
-        solvedMatrix.append(row)
-    resultMatrix = solvedMatrix[:]
-    solvedMatrix = numpy.array(solvedMatrix)
-    resultMatrix = numpy.array(resultMatrix)
+    print(matrix)
+    print("Решение")
+    p0 = create_p0()
+    pn = p0[:]
+    for i in range(1, 9):
+        piMatrix = numpy.power(matrix, i)
+        print(f"Матрица \n{piMatrix}")
+        Pn = p0.dot(piMatrix)
+        print(f"P{i}={Pn}")
+        print()
+    solvedMatrix = solve_system(matrix)
 
-    for i in range(1, 8):
-        print(f"Матрица", end="\n")
-        resultMatrix = numpy.power(solvedMatrix, i)
-        print(resultMatrix)
-        Pn = p0.dot(resultMatrix)
-        print(f"P({i + 1}) = {Pn}")
+    print(f"\nРешение X =  {solvedMatrix}")
 
 
 main()
