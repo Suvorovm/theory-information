@@ -17,7 +17,7 @@ def create_matrix():
 
 
 def create_p0():
-    return numpy.array([1, 0, 0, 0])
+    return numpy.array([0.2, 0.3, 0.4, 0.1])
 
 
 def create_b():
@@ -43,8 +43,9 @@ def main():
     print("Решение")
     p0 = create_p0()
     pn = p0[:]
+    piMatrix = create_matrix()
     for i in range(1, 9):
-        piMatrix = numpy.power(matrix, i)
+        piMatrix = matrix.dot(piMatrix)
         print(f"Матрица \n{piMatrix}")
         Pn = p0.dot(piMatrix)
         print(f"P{i}={Pn}")
