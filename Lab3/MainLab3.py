@@ -26,12 +26,13 @@ def create_b():
 
 def solve_system(sourceMatrix):
     aMatrix = sourceMatrix.copy()
-    aMatrix[3] = [1] * 4
+    aMatrix = aMatrix.transpose()
     for i in range(0, 3):
         for j in range(0, 3):
             if i == j:
                 aMatrix[i][j] -= 1
-    resultX = numpy.linalg.solve(aMatrix, create_b())
+    aMatrix[3] = [1] * 4
+    resultX = numpy.linalg.inv(aMatrix).dot(create_b())
     return resultX
 
 
