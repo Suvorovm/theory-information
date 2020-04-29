@@ -41,7 +41,7 @@ def create_b():
 
 
 def create_source_probabilities():
-    return numpy.array([0.2, 0.25, 0.3, 0.25])
+    return numpy.array([1, 0, 0, 0])
 
 
 def solve_algebraic_system(sourceMatrix, b):
@@ -83,11 +83,14 @@ def model(p, t):
 
 
 def main():
+    print(f"исходные вероятности  = {create_source_probabilities()}\n")
     sourceMatrix = create_lambda_matrix()
     matrixToSolve = create_matrix_algebraic(sourceMatrix)
     resultProbability = solve_algebraic_system(matrixToSolve, create_b())
+    print("Решние алгебраических уравнений")
     print(resultProbability)
     print("\n")
+    print("Результат решения диф уравнений")
     CountInterval = 15
     deltaT = numpy.linspace(0, 1, CountInterval)
     solved = odeint(model, create_source_probabilities(), deltaT)
