@@ -60,23 +60,38 @@ def get_row_exclude_item(matrix, indexRow, indexExcludedElement):
 def get_column_excluded_item(matrix, indexColumn, indexExcludedElement):
     resultColumn = []
     for i in range(0, len(matrix)):
-        if indexColumn == i:
+        if indexExcludedElement == i:
             continue
         resultColumn.append(matrix[i][indexColumn])
     return resultColumn
 
 
-def solve_diff_system(sourceMatrix, probabilitiesMatrix):
-    return 0
+def model(p, t):
+    difSystem = []
+    matrixToSolve = numpy.array(create_lambda_matrix())
+    for i in range(0, len(matrixToSolve)):
+        row = get_row_exclude_item(matrixToSolve, i, i)
+        column = get_column_excluded_item(matrixToSolve, i, i)
+        firstTerm = sum(row) * p[i]
+        secondTerm = 0
+        for j in range(0, len(matrixToSolve[0])):
+            if i == j:
+                continue
+            secondTerm += p[j] * matrixToSolve[j][i]
+        difSystem.append(secondTerm - firstTerm)
+    return difSystem
 
 
 def main():
     sourceMatrix = create_lambda_matrix()
     matrixToSolve = create_matrix_algebraic(sourceMatrix)
     resultProbability = solve_algebraic_system(matrixToSolve, create_b())
-    solve_diff_system(matrixToSolve, create_source_probabilities())
     print(resultProbability)
     print("\n")
+    CountInterval = 15
+    deltaT = numpy.linspace(0, 1, CountInterval)
+    solved = odeint(model, create_source_probabilities(), deltaT)
+    print(solved)
 
 
 main()
