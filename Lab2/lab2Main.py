@@ -37,10 +37,10 @@ def EnterValues():
     summer = 0
     for key, value in dic.items():
         summer += value
-    if summer > 1:
-        print("Вероятность > 1. ERROR")
-        return None
-    return dic
+        if summer > 1:
+            print("Вероятность > 1. ERROR")
+            return None
+        return dic
 
 
 def diplay_result(resultKhartlicod, resultShennoncod, uniformCode):
